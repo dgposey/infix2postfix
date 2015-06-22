@@ -1,6 +1,9 @@
 <?php
 	require_once "Stack.php";
 	
+	/**
+	 * An extension of Stack specifically for arithmetical operators, represented by Operator.
+	 */
 	class OperatorStack extends Stack{
 		function push($operator){
 			$op = new Operator($operator);
@@ -20,10 +23,17 @@
 	}
 	
 	
+	/**
+	 * An object that represents a single operator.
+	 */
 	class Operator{
 		private $operator;
 		private $precedence;
 		
+		/**
+		 * class instance constructor
+		 * sets precedence based on input
+		 */
 		function __construct($operator){
 			$this->operator = $operator;
 			
@@ -55,16 +65,25 @@
 			$this->precedence = $prec;
 		}
 		
+		/**
+		 * @return operator
+		 */
 		function get_operator(){
 			return $this->operator;
 		}
 		
+		/**
+		 * @return operator
+		 */
 		function get_precedence(){
 			return $this->precedence;
 		}
 	}
 	
 	
+	/**
+	 * An exception thrown when an invalid text representation of an arithmetical operator is passed into Operator's constructor.
+	 */
 	class InvalidOperatorException extends Exception {
 		function __construct($operator){
 			parent::__construct("Invalid operator: " . $operator);
